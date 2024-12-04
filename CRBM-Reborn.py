@@ -142,7 +142,7 @@ class SimpleApp(QWidget):
 
         self.setLayout(layout)
 
-        self.setWindowTitle('CosmicReach block maker')
+        self.setWindowTitle('CR Block Maker')
 
     def showDialog(self):
         options = QFileDialog.Options()
