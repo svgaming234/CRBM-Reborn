@@ -12,20 +12,15 @@ from PIL import Image
 
 if platform.system() == "Windows":
     if os.getenv("LOCALAPPDATA"):
-        print("1")
         baseDir = os.getenv("LOCALAPPDATA") + "\\cosmic-reach\\mods\\assets"
     else:
-        print("2")
         baseDir = ".\\mods\\assets"
 else:
     if os.getenv("XDG_DATA_HOME"):
-        print("3")
         baseDir = os.getenv("XDG_DATA_HOME") + "/cosmic-reach/mods/assets"
     elif os.getenv("HOME"):
-        print("4")
         baseDir = os.getenv("HOME") + "/.local/share/cosmic-reach/mods/assets"
     else:
-        print("5")
         baseDir = "./mods/assets"
 
 
