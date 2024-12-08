@@ -4,11 +4,30 @@ import sys
 import os
 import json
 import shutil
-import getpass
+import platform
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QFileDialog, QLabel, QLineEdit, QCheckBox, QSizePolicy, QMessageBox, QFrame, QTextEdit, QListWidget, QListWidgetItem, QHBoxLayout, QAbstractItemView, QSlider, QComboBox
 from PyQt5.QtGui import QPixmap, QImageReader, QIcon, QImage
 from PyQt5.QtCore import Qt
 from PIL import Image
+
+if platform.system() == "Windows":
+    if os.getenv("LOCALAPPDATA"):
+        print("1")
+        baseDir = os.getenv("LOCALAPPDATA") + "\\cosmic-reach\\mods\\assets"
+    else:
+        print("2")
+        baseDir = ".\\mods\\assets"
+else:
+    if os.getenv("XDG_DATA_HOME"):
+        print("3")
+        baseDir = os.getenv("XDG_DATA_HOME") + "/cosmic-reach/mods/assets"
+    elif os.getenv("HOME"):
+        print("4")
+        baseDir = os.getenv("HOME") + "/.local/share/cosmic-reach/mods/assets"
+    else:
+        print("5")
+        baseDir = "./mods/assets"
+
 
 class NewEventWindow(QWidget):
     def __init__(self, parent=None):
@@ -214,9 +233,6 @@ class SimpleApp(QWidget):
             self.selectedItemIndex = None
 
     def exportFiles(self):
-        username = getpass.getuser()
-        baseDir = f"C:/Users/{username}/AppData/Local/cosmic-reach/mods/assets"
-
         blockDir = os.path.join(baseDir, 'blocks')
         modelDir = os.path.join(baseDir, 'models', 'blocks')
         textureDir = os.path.join(baseDir, 'textures', 'blocks')
