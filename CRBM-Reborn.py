@@ -228,21 +228,21 @@ class SimpleApp(QWidget):
             self.selectedItemIndex = None
 
     def exportFiles(self):
-        blockDir = os.path.join(baseDir, 'blocks')
-        modelDir = os.path.join(baseDir, 'models', 'blocks')
-        textureDir = os.path.join(baseDir, 'textures', 'blocks')
-
         try:
-            os.makedirs(blockDir, exist_ok=True)
-            os.makedirs(modelDir, exist_ok=True)
-            os.makedirs(textureDir, exist_ok=True)
-
             for item in self.items:
                 modName = item["modName"]
                 blockName = item["blockName"]
                 includeSlabs = item["includeSlabs"]
                 imagePath = item["imagePath"]
                 transparency = item["transparency"] / 100
+
+                blockDir = os.path.join(baseDir, modName, 'blocks')
+                modelDir = os.path.join(baseDir, modName, 'models', 'blocks')
+                textureDir = os.path.join(baseDir, modName, 'textures', 'blocks')
+
+                os.makedirs(blockDir, exist_ok=True)
+                os.makedirs(modelDir, exist_ok=True)
+                os.makedirs(textureDir, exist_ok=True)
 
                 blockData = {
                     "stringId": f"{modName}:{blockName}",
